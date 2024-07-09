@@ -263,13 +263,34 @@ void Registrar_venta() {
 }
 
 
-// G. Listar las ventas realizadas.
+// G. LISTAR LAS VENTAS REALIZADAS
 
+void Listar_ventas() {
+    cout << "\n                  HA SELECCIONADO LA OPCION 7                 " << endl;
+    cout << "\n                 LISTA DE VENTAS REALIZADAS                   " << endl;
+    cout << "______________________________________________________________\n";
 
-
+    if (venta_n > 0) {
+        cout << "\n   LISTA DE VENTAS REALIZADAS HASTA EL MOMENTO   \n" << endl;
+        for (int i = 0; i < venta_n; i++) {
+            cout << "VENTA " << i + 1 << endl;
+            cout << "ID Venta : " << ventas[i].id_venta << endl;
+            cout << "Producto : " << ventas[i].producto << endl;
+            cout << "Precio   : " << ventas[i].precio_total/ventas[i].cantidad<<endl;
+            cout << "Cantidad : " << ventas[i].cantidad << endl;
+            cout << "Precio Total: " << ventas[i].precio_total << endl;
+            cout << "---------------------------------------" << endl;
+        }
+    } else {
+        cout << "\nNo hay ventas realizadas." << endl;
+        cout << "______________________________________________________________" << endl;
+    }
+}
 
 
 // H. Calcular el total de ventas realizadas.
+
+
 
 // S. Salir del programa. 
 
@@ -327,6 +348,7 @@ int main (){
 				break;
 			case 7:
 				// LLAMAMOS A : G. Listar las ventas realizadas.
+				Listar_ventas();
 				break;
 			case 8:
 				// LLAMAMOS A : H. Calcular el total de ventas realizadas.
