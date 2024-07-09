@@ -36,12 +36,13 @@ const int max_productos=50;
 Producto prod[max_productos];
 int producto_n=0;
 
-// A. FUNCION PARA REGISTRAR UN PRODUCTO 
-void nuevo_producto(){
+// A. FUNCION PARA REGISTRAR UN NUEVO PRODUCTO 
+void Nuevo_producto(){
 	if(producto_n< max_productos){
 		
 		cout << "\n                  Ha seleccionado la opcion 1             "<<endl;
 		cout << "\n                  Registrar un nuevo producto.            "<<endl;
+		cout << "____________________________________________________________"<<endl;
 		Producto nuevo_producto;
 		cin.ignore(); // limpia el buffer
 		
@@ -53,13 +54,28 @@ void nuevo_producto(){
 		cin >>nuevo_producto.precio;
 		cin.ignore(); // limpia el buffer 	 
 		
+		prod[producto_n++] = nuevo_producto ; // guardamos el nuevo producto en el arreglo y aumentamos el contador
 		cout << "\nProducto registrado exitosamente.\n";
 	}else{
 		cout << "No es posible agregar mas productos , se alcanzo el limite\n";
 	}
 }
 
-// B. Listar los productos registrados.
+// B. lISTAR LOS PRODUCTOS REGISTRADOS
+void Lista_productos(){
+	cout << "\n                  HA SELECCIOANDO LA OPCION 2               "<<endl;
+	cout << "\n                LISTA DE PRODUCTOS REGISTRADOS              "<<endl;
+	cout << "______________________________________________________________"<<endl;
+	
+	cout << "\n   LISTA  DE  PRODUCTOS  REGISTRADOS  HASTA  EL  MOMENTO  \n"<<endl;
+	for(int i = 0 ; i< producto_n ; i++){
+		cout<<"\nPRODUCTO " << i + 1 <<endl;
+		cout<<"\nNombre de producto : "<<prod[i].nombre<<endl;
+		cout<<"\nPrecio             : "<<prod[i].precio<<endl;
+		cout<<"---------------------------------------"<<endl;
+	}
+}
+
 // C. Buscar un producto por nombre. 
 // D. Actualizar los datos de un producto.
 // E. Eliminar un producto.  
@@ -81,7 +97,7 @@ int mostrar_menu(){
     cout<< "7. Listar las ventas realizadas.          "<<endl;
     cout<< "8. Calcular el total de ventas realizadas."<<endl;
     cout<< "9. Salir del programa.                    "<<endl;
-    cout<< "Ingrese el numero de la opcion deseada: ",
+    cout<< "Ingrese el numero de la opcion deseada: ";
     cin >> opcion;
 	return opcion;	
 }
@@ -95,11 +111,11 @@ int main (){
 		switch(opcion){
 			case 1:
 				// LLAMAMOS A : A. FUNCION PARA REGISTRAR UN PRODUCTO
-				nuevo_producto(); 
+				Nuevo_producto(); 
 				break;
 			case 2:
-				// B. Listar los productos registrados.
-
+				// B. LISTAR PRODUCTOS REGISTRADOS
+				Lista_productos();
 				break;
 			case 3:
 				// LLAMAMOS A : C. Buscar un producto por nombre. 
