@@ -177,9 +177,38 @@ void Actualizar_datos() {
     cin.ignore(); // Limpiar el buffer de entrada
 }
 
-// E. Eliminar un producto.
+// E. ELIMINAR PRODUCTO 
 
-  
+void Eliminar_producto() {
+    cout << "\n                       HA SELECCIONADO LA OPCION 5                   " << endl;
+    cout << "                           ELIMINAR UN PRODUCTO                        " << endl;
+    cout << "_______________________________________________________________________" << endl;
+
+    if (producto_n == 0) {
+        cout << "\n No hay productos registrados para eliminar.\n";
+        return;
+    }
+
+    cout << "\n                            PRODUCTO A ELIMINAR                 \n" << endl;
+    int indice_eliminar;
+    cout << "\n INGRESE EL INDICE DEL PRODUCTO QUE DESEA ELIMINAR (1-" << producto_n << ") "<<endl;
+    cout << "\nIndice : ";
+    cin >> indice_eliminar;
+
+    if (indice_eliminar < 1 || indice_eliminar > producto_n) {
+        cout << "\n Índice inválido , por favor ingrese un índice válido." << endl;
+        return;
+    }
+
+    int indice_arreglo = indice_eliminar - 1;
+
+    prod[indice_arreglo] = prod[producto_n - 1];
+    producto_n--;
+
+    cout << "\nProducto eliminado exitosamente." << endl;
+    cout << "\n_______________________________________________________________" << endl;
+}
+
 // F. Registrar una venta.
 
 // G. Listar las ventas realizadas.
@@ -234,6 +263,7 @@ int main (){
 				break;
 			case 5:
 				// LLAMAMOS A : E. Eliminar un producto. 
+				Eliminar_producto();
 				break;
 			case 6:
 				// LLAMAMOS A : F. Registrar una venta.
