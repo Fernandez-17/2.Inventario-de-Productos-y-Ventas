@@ -24,12 +24,12 @@ struct Producto{
 	string nombre;
 	float precio;
 };
-//struct Venta {
-//	int id_venta;
-	//string producto;
-//	int cantidad;
-//	float precio_total;
-//};
+struct Venta {
+	int id_venta;
+	string producto;
+	int cantidad;
+	float precio_total;
+};
 
 const int max_productos=50;
 Producto prod[max_productos];
@@ -209,9 +209,65 @@ void Eliminar_producto() {
     cout << "\n_______________________________________________________________" << endl;
 }
 
-// F. Registrar una venta.
+
+// F. REGISTRAR UNA VENTA 
+
+const int max_ventas = 50;
+Venta ventas[max_ventas];
+int venta_n = 0;
+
+void Registrar_venta() {
+    cout << "\n                  HA SELECCIONADO LA OPCION 6                 " << endl;
+    cout << "\n                   REGISTRAR UNA NUEVA VENTA                  " << endl;
+    cout << "______________________________________________________________\n";
+
+    if (producto_n == 0) {
+        cout << "\nNo hay productos registrados.\n";
+        cout << "__________________________________________________________________" << endl;
+        return;
+    }
+
+    Venta nueva_venta;
+
+    // Generar un id de venta simple (puedes mejorar esto con un contador global)
+    nueva_venta.id_venta = venta_n + 1;
+
+    cout << "\n                       NUEVA VENTA                         \n" << endl;
+    cout << "\n              SELECCIONE EL PRODUCTO A VENDER              \n" << endl;
+	cout << "\n             (Ingrese el número de producto)               \n" << endl;
+	
+    for (int i = 0; i < producto_n; i++) {
+        cout << i + 1 << ". " << prod[i].nombre << " - Precio: " << prod[i].precio << endl;
+    }
+    cout << "\nNumero de producto: ";
+    int opcion_producto;
+    cin >> opcion_producto;
+
+    if (opcion_producto < 1 || opcion_producto > producto_n) {
+        cout << "\nOpción inválida.\n";
+        cout << "__________________________________________________________________" << endl;
+        return;
+    }
+
+    nueva_venta.producto = prod[opcion_producto - 1].nombre;
+
+    cout << "\nCantidad: ";
+    cin >> nueva_venta.cantidad;
+
+    nueva_venta.precio_total = nueva_venta.cantidad * prod[opcion_producto - 1].precio;
+
+    ventas[venta_n++] = nueva_venta;
+
+    cout << "\nVenta registrada exitosamente.\n";
+    cout << "______________________________________________________________" << endl;
+}
+
 
 // G. Listar las ventas realizadas.
+
+
+
+
 
 // H. Calcular el total de ventas realizadas.
 
@@ -267,6 +323,7 @@ int main (){
 				break;
 			case 6:
 				// LLAMAMOS A : F. Registrar una venta.
+				Registrar_venta();
 				break;
 			case 7:
 				// LLAMAMOS A : G. Listar las ventas realizadas.
