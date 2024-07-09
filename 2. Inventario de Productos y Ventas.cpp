@@ -288,9 +288,27 @@ void Listar_ventas() {
 }
 
 
-// H. Calcular el total de ventas realizadas.
+// H. CALCULAR EL TOTAL DE VENTAS REALIZADAS
 
+float total_ventas() {
+    float total = 0.0;
 
+    for (int i = 0; i < venta_n; i++) {
+        total += ventas[i].precio_total;
+    }
+
+    return total;
+}
+
+void Calcular_total_ventas(){
+	// LLAMAMOS A : H. Calcular el total de ventas realizadas.
+    float suma_ventas = total_ventas();
+    cout << "\n                  HA SELECCIONADO LA OPCION 8                 \n" << endl;
+    cout << "\n                 TOTAL DE VENTAS REALIZADAS  $                \n" << endl;
+    cout << "\n______________________________________________________________\n" << endl;
+	cout << "\nTOTAL DE VENTAS : " << suma_ventas << endl;
+    cout << "__________________________________________________________________" << endl;
+}
 
 // S. Salir del programa. 
 
@@ -352,6 +370,7 @@ int main (){
 				break;
 			case 8:
 				// LLAMAMOS A : H. Calcular el total de ventas realizadas.
+				Calcular_total_ventas();
 				break;
 			case 9:
 				//  Salir del programa. 
