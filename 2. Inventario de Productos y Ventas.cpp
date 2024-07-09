@@ -17,7 +17,6 @@ H: Calcular el total de ventas realizadas.
 S: Salir del programa.
 • El menú debe estar ciclado y permitir volver al menú principal después de cada opción.*/
 #include<iostream>
-#include<conio.h>
 #include<string>
 using namespace std;
 
@@ -25,12 +24,12 @@ struct Producto{
 	string nombre;
 	float precio;
 };
-struct Venta {
-	int id_venta;
-	string Producto;
-	int cantidad;
-	float precio_total;
-};
+//struct Venta {
+//	int id_venta;
+	//string producto;
+//	int cantidad;
+//	float precio_total;
+//};
 
 const int max_productos=50;
 Producto prod[max_productos];
@@ -40,20 +39,20 @@ int producto_n=0;
 void Nuevo_producto(){
 	if(producto_n< max_productos){
 		
-		cout << "\n                  Ha seleccionado la opcion 1             "<<endl;
-		cout << "\n                  Registrar un nuevo producto.            "<<endl;
+		cout << "\n                  HA SELECCIONADO LA OPCION 1             "<<endl;
+		cout << "\n                  REGISTRAR UN NUEVO PRODUCTO             "<<endl;
 		cout << "____________________________________________________________"<<endl;
+		
 		Producto nuevo_producto;
 		cin.ignore(); // limpia el buffer
 		
 		cout << "\n                         NUEVO PRODUCTO                   "<<endl;
-		cout << "\nNombre de producto : ";
-		getline(cin,nuevo_producto.nombre);
+		cout << "\nNombre : ";
+		getline(cin, nuevo_producto.nombre);
 		
 		cout << "\nPrecio : ";
 		cin >>nuevo_producto.precio;
-		cin.ignore(); // limpia el buffer 	 
-		
+		 	 
 		prod[producto_n++] = nuevo_producto ; // guardamos el nuevo producto en el arreglo y aumentamos el contador
 		cout << "\nProducto registrado exitosamente.\n";
 	}else{
@@ -67,22 +66,77 @@ void Lista_productos(){
 	cout << "\n                LISTA DE PRODUCTOS REGISTRADOS              "<<endl;
 	cout << "______________________________________________________________"<<endl;
 	
-	cout << "\n   LISTA  DE  PRODUCTOS  REGISTRADOS  HASTA  EL  MOMENTO  \n"<<endl;
-	for(int i = 0 ; i< producto_n ; i++){
-		cout<<"\nPRODUCTO " << i + 1 <<endl;
-		cout<<"\nNombre de producto : "<<prod[i].nombre<<endl;
-		cout<<"\nPrecio             : "<<prod[i].precio<<endl;
-		cout<<"---------------------------------------"<<endl;
-	}
+	if (producto_n > 0) {
+        cout <<"\n   LISTA  DE  PRODUCTOS  REGISTRADOS  HASTA  EL  MOMENTO  \n"<<endl;
+	    for(int i = 0 ; i< producto_n ; i++){
+		    cout<<"\nPRODUCTO " << i + 1 <<endl;
+		    cout<<"\nNombre : "<< prod[i].nombre <<endl;
+		    cout<<"\nPrecio : "<< prod[i].precio <<endl;
+		    cout<<"---------------------------------------"<<endl;
+		}
+	} else {
+	cout << "\nNo hay productos registrados."<<endl;
+	} 
 }
 
-// C. Buscar un producto por nombre. 
+// C. BUSCAR UN PRODUCTO POR SU NOMBRE
+
+// Función para convertir cadena a minúsculas
+string to_lower(string str) {
+    string result = str;
+    for (int i = 0; i < result.length(); ++i) {
+        if (result[i] >= 'A' && result[i] <= 'Z') {
+            result[i] = result[i] - 'A' + 'a'; // Convertir a minúscula
+        }
+    }
+    return result;
+}
+// FUNCION PARA BUSCAR
+void Buscar_producto() {
+    cout << "\n                  HA SELECCIONADO LA OPCION 3                 "<<endl;
+	cout << "\n                  BUSCAR PRODUCTO POR NOMBRE                  "<<endl;
+    cout << "______________________________________________________________\n";
+
+    string producto_buscado;
+    cout << "\n      INGRESE EL NOMBRE DEL PRODUCTO QUE DESEA BUSCAR        "<<endl;
+    cout << "\nNombre : ";
+    getline(cin, producto_buscado);
+    cout << "----------------------------------------------------------------"<<endl;
+
+    string aux  = to_lower(producto_buscado);
+
+    bool encontrado = false;
+    for (int i = 0; i < producto_n; i++) {
+        string nombre_producto= prod[i].nombre;
+        string nombre_producto_aux = to_lower(nombre_producto);
+        
+        if (nombre_producto_aux == aux) {
+            cout << "\nProducto encontrado \n";
+            cout << "\nNombre: " << prod[i].nombre << endl;
+            cout << "\nPrecio: " << prod[i].precio << endl;
+            cout << "\n--------------------------------------------------------"<< endl;
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        cout << "\nEl producto que busca no existe en este sistema.\n";
+    }
+}
+
 // D. Actualizar los datos de un producto.
-// E. Eliminar un producto.  
+
+// E. Eliminar un producto.
+  
 // F. Registrar una venta.
+
 // G. Listar las ventas realizadas.
+
 // H. Calcular el total de ventas realizadas.
+
 // S. Salir del programa. 
+
 
 //FUNCION PARA MOSTARAR 	DE MENU DE OPCIONES 
 int mostrar_menu(){
@@ -99,6 +153,7 @@ int mostrar_menu(){
     cout<< "9. Salir del programa.                    "<<endl;
     cout<< "Ingrese el numero de la opcion deseada: ";
     cin >> opcion;
+    cin.ignore();
 	return opcion;	
 }
 
@@ -119,6 +174,7 @@ int main (){
 				break;
 			case 3:
 				// LLAMAMOS A : C. Buscar un producto por nombre. 
+				Buscar_producto();
 				break;
 			case 4:
 				// LLAMAMOS A : D. Actualizar los datos de un producto.
@@ -151,7 +207,6 @@ int main (){
 		 }		
 	} while (opcion !=9);
 	
-	getch();
 	return 0;
 }
 
